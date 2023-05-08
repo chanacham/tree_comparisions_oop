@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace TreeComparison {
+namespace TreeComparison
+{
 
-    class BinarySearchTree<T> where T : IComparable<T>, IEquatable<T> { 
-    
+    class BinaryTree<T> where T : IComparable<T>, IEquatable<T>
+    {
+
         // Basic node stored in unbalanced binary search trees
         internal class BinaryNode<T>
         {
@@ -18,7 +20,7 @@ namespace TreeComparison {
             {
                 element = theElement;
                 left = null;
-                right = null; 
+                right = null;
             }
 
             public BinaryNode(T theElement, BinaryNode<T> lt, BinaryNode<T> rt)
@@ -29,7 +31,7 @@ namespace TreeComparison {
             }
 
             public T element;            // The data in the node
-            public  BinaryNode<T> left;   // Left child
+            public BinaryNode<T> left;   // Left child
             public BinaryNode<T> right;  // Right child
         }
 
@@ -39,10 +41,10 @@ namespace TreeComparison {
 
 
 
-    /**
-     * Construct the tree.
-     */
-        public BinarySearchTree()
+        /**
+         * Construct the tree.
+         */
+        public BinaryTree()
         {
             root = null;
         }
@@ -51,7 +53,7 @@ namespace TreeComparison {
          * Insert into the tree; duplicates are ignored.
          * @param x the item to insert.
          */
-        void Insert(T x)
+        public void Insert(T x)
         {
             root = Insert(x, root);
         }
@@ -60,7 +62,7 @@ namespace TreeComparison {
          * Remove from the tree. Nothing is done if x is not found.
          * @param x the item to remove.
          */
-        void Remove(T x)
+        public void Remove(T x)
         {
             root = Remove(x, root);
         }
@@ -72,7 +74,7 @@ namespace TreeComparison {
         T FindMin()
         {
             //T? found = null;
-            T? found = default; 
+            T? found = default;
             if (!IsEmpty())
             {
                 found = FindMin(root).element;
@@ -91,7 +93,7 @@ namespace TreeComparison {
             T? found = default;
 
             if (!IsEmpty())
-        { 
+            {
                 found = FindMax(root).element;
             }
             return found;
@@ -102,7 +104,7 @@ namespace TreeComparison {
          * @param x the item to search for.
          * @return true if not found.
          */
-        Boolean Contains(T x)
+        public Boolean Contains(T x)
         {
             return Contains(x, root);
         }
@@ -139,7 +141,7 @@ namespace TreeComparison {
          * return a string with a visual representation of BST
          * @return String representation of the tree
          */
-     
+
         String ToString()
         {
             StringBuilder buffer = new StringBuilder(50);
@@ -167,7 +169,7 @@ namespace TreeComparison {
             int compareResult = x.CompareTo(t.element);
 
             if (compareResult < 0)
-            t.left = Insert(x, t.left);
+                t.left = Insert(x, t.left);
             else if (compareResult > 0)
                 t.right = Insert(x, t.right);
             else

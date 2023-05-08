@@ -9,8 +9,35 @@ using System.Collections.Generic;
 
 namespace TreeComparison
 {
-    internal class AvlTree <T> where T : IComparable<T>, IEquatable<T>
+    class AvlTree <T> where T : IComparable<T>, IEquatable<T>
     {
+        internal class AvlNode<T>
+        {
+            // Constructors
+            public AvlNode(T theElement)
+            {
+                element = theElement;
+                left = null;
+                right = null;
+            }
+
+            public AvlNode(T theElement, AvlNode<T> lt, AvlNode<T> rt)
+            {
+                element = theElement;
+                left = lt;
+                right = rt;
+                height = 0;
+            }
+
+
+            public T element;      // The data in the node
+            public AvlNode<T> left;         // Left child
+            public AvlNode<T> right;        // Right child
+            public int height;       // Height
+        }
+
+        /** The tree root. */
+        public AvlNode<T> root;
 
         /**
          * Construct the tree.
@@ -24,7 +51,7 @@ namespace TreeComparison
          * Insert into the tree; duplicates are ignored.
          * @param x the item to insert.
          */
-            public void insert(T x)
+            public void Insert(T x)
             {
                 root = Insert(x, root);
             }
@@ -33,7 +60,7 @@ namespace TreeComparison
              * Remove from the tree. Nothing is done if x is not found.
              * @param x the item to remove.
              */
-            public void remove(T x)
+            public void Remove(T x)
             {
                 root = Remove(x, root);
             }
@@ -45,7 +72,7 @@ namespace TreeComparison
              * @param t the node that roots the subtree.
              * @return the new root of the subtree.
              */
-            private AvlNode<T> Remove(T x, AvlNode<T> t)
+            AvlNode<T> Remove(T x, AvlNode<T> t)
             {
                 if (t == null)
                     return t;   // Item not found; do nothing
@@ -70,7 +97,7 @@ namespace TreeComparison
              * Find the smallest item in the tree.
              * @return smallest item or null if empty.
              */
-            public T FindMin()
+            T FindMin()
             {
                // T? min = null;
             T? min = default;
@@ -84,7 +111,7 @@ namespace TreeComparison
              * Find the largest item in the tree.
              * @return the largest item of null if empty.
              */
-            public T FindMax()
+            T FindMax()
             {
                  //T max = null;
                  T? max = default;
@@ -125,7 +152,7 @@ namespace TreeComparison
             /**
              * Print the tree contents in sorted order.
              */
-            public void PrintTree()
+            void PrintTree()
             {
                 if (IsEmpty())
                    Console.WriteLine("Empty tree");
@@ -133,10 +160,10 @@ namespace TreeComparison
                     PrintTree(root);
             }
 
-        private static Int32 ALLOWED_IMBALANCE = 1; // what is int32???
+        private static int ALLOWED_IMBALANCE = 1; // what is int32???
 
         // Assume t is either balanced or within one of being balanced
-        private AvlNode<T> Balance(AvlNode<T> t)
+        AvlNode<T> Balance(AvlNode<T> t)
         {
             if (t == null)
                 return t;
@@ -157,12 +184,12 @@ namespace TreeComparison
             return t;
         }
 
-        public void CheckBalance()
+         void CheckBalance()
         {
             CheckBalance(root);
         }
 
-        private int CheckBalance(AvlNode<T> t)
+        int CheckBalance(AvlNode<T> t)
         {
             if (t == null)
                 return -1;
@@ -186,7 +213,7 @@ namespace TreeComparison
          * @param t the node that roots the subtree.
          * @return the new root of the subtree.
          */
-        private AvlNode<T> Insert(T x, AvlNode<T> t)
+        AvlNode<T> Insert(T x, AvlNode<T> t)
         {
             if (t == null)
                 return new AvlNode<T>(x, null, null);
@@ -207,7 +234,7 @@ namespace TreeComparison
          * @param t the node that roots the tree.
          * @return node containing the smallest item.
          */
-        private AvlNode<T> FindMin(AvlNode<T> t)
+        AvlNode<T> FindMin(AvlNode<T> t)
         {
             if (t == null)
                 return t;
@@ -222,7 +249,7 @@ namespace TreeComparison
          * @param t the node that roots the tree.
          * @return node containing the largest item.
          */
-        private AvlNode<T> FindMax(AvlNode<T> t)
+        AvlNode<T> FindMax(AvlNode<T> t)
         {
             if (t == null)
                 return t;
@@ -238,7 +265,7 @@ namespace TreeComparison
          * @param t the node that roots the tree.
          * @return true if x is found in subtree.
          */
-        private Boolean Contains(T x, AvlNode<T> t)
+        Boolean Contains(T x, AvlNode<T> t)
         {
             while (t != null)
             {
@@ -259,7 +286,7 @@ namespace TreeComparison
          * Internal method to print a subtree in sorted order.
          * @param t the node that roots the tree.
          */
-        private void PrintTree(AvlNode<T> t)
+        void PrintTree(AvlNode<T> t)
         {
             if (t != null)
             {
@@ -272,7 +299,7 @@ namespace TreeComparison
         /**
          * Return the height of node t, or -1, if null.
          */
-        private int Height(AvlNode<T> t)
+        int Height(AvlNode<T> t)
         {
             return t == null ? -1 : t.height;
         }
@@ -282,7 +309,7 @@ namespace TreeComparison
          * For AVL trees, this is a single rotation for case 1.
          * Update heights, then return new root.
          */
-        private AvlNode<T> RotateWithLeftChild(AvlNode<T> k2)
+        AvlNode<T> RotateWithLeftChild(AvlNode<T> k2)
         {
             AvlNode<T> k1 = k2.left;
             k2.left = k1.right;
@@ -297,7 +324,7 @@ namespace TreeComparison
          * For AVL trees, this is a single rotation for case 4.
          * Update heights, then return new root.
          */
-        private AvlNode<T> RotateWithRightChild(AvlNode<T> k1)
+        AvlNode<T> RotateWithRightChild(AvlNode<T> k1)
         {
             AvlNode<T> k2 = k1.right;
             k1.right = k2.left;
@@ -313,7 +340,7 @@ namespace TreeComparison
          * For AVL trees, this is a double rotation for case 2.
          * Update heights, then return new root.
          */
-        private AvlNode<T> DoubleWithLeftChild(AvlNode<T> k3)
+        AvlNode<T> DoubleWithLeftChild(AvlNode<T> k3)
         {
             k3.left = RotateWithRightChild(k3.left);
             return RotateWithLeftChild(k3);
@@ -325,39 +352,13 @@ namespace TreeComparison
          * For AVL trees, this is a double rotation for case 3.
          * Update heights, then return new root.
          */
-        private AvlNode<T> DoubleWithRightChild(AvlNode<T> k1)
+        AvlNode<T> DoubleWithRightChild(AvlNode<T> k1)
         {
             k1.right = RotateWithLeftChild(k1.right);
             return RotateWithRightChild(k1);
         }
 
-        public class AvlNode<T>
-        {
-            // Constructors
-            AvlNode(T theElement)
-            {
-                element = theElement;
-                left = null;
-                right = null; 
-            }
-
-            AvlNode(T theElement, AvlNode<T> lt, AvlNode<T> rt)
-            {
-                element = theElement;
-                left = lt;
-                right = rt;
-                height = 0;
-            }
-
-           public  T element;      // The data in the node
-           public  AvlNode<T> left;         // Left child
-           public AvlNode<T> right;        // Right child
-           public int height;       // Height
-        }
-
-        /** The tree root. */
-        public AvlNode<T> root;
-
+      
     }
 
 }

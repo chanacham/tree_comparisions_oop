@@ -4,23 +4,49 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 
 namespace TreeComparison
 {
     internal class SplayTree<T> where T : IComparable<T>, IEquatable<T>
     {
-            /**
-             * Construct the tree.
-             */
-            public SplayTree()
+
+        // Basic node stored in unbalanced binary search trees
+        internal class BinaryNode<AnyType>
+        {
+            // Constructors
+            public BinaryNode(T theElement)
             {
-                nullNode = new BinaryNode<T>(null);
-                nullNode.Left = nullNode.Right = nullNode;
-                root = nullNode;
+                element = theElement;
+                Left = null;
+                Right = null;
             }
 
-    private BinaryNode<T> newNode = null;  // Used between different inserts
+            public BinaryNode(T theElement, BinaryNode<T> lt, BinaryNode<T> rt)
+            {
+                element = theElement;
+                Left = lt;
+                Right = rt;
+            }
+
+            public T element;            // The data in the node
+            public BinaryNode<T> Left;   // Left child
+            public BinaryNode<T> Right;  // Right child
+        }
+
+        BinaryNode<T> root;
+        BinaryNode<T> nullNode;
+        /**
+         * Construct the tree.
+         */
+        public SplayTree()
+        {
+            nullNode = new BinaryNode<T>(default);
+            nullNode.Left = nullNode.Right = nullNode;
+            root = nullNode;
+        }
+
+        private BinaryNode<T> newNode = null;  // Used between different inserts
 
         /**
          * Insert into the tree.
@@ -30,7 +56,7 @@ namespace TreeComparison
         public void Insert(T x)
         {
             if (newNode == null)
-                newNode = new BinaryNode<T>(null);
+                newNode = new BinaryNode<T>(default);
             newNode.element = x;
 
             if (root == nullNode)
@@ -101,7 +127,7 @@ namespace TreeComparison
          */
         public T FindMin()
         {
-           // T min = null;
+            // T min = null;
             T? min = default;
 
             if (!IsEmpty())
@@ -128,8 +154,8 @@ namespace TreeComparison
          */
         public T FindMax()
         {
-           // T max = null;
-            T? max = default; 
+            // T max = null;
+            T? max = default;
             if (!IsEmpty())
             {
                 BinaryNode<T> ptr = root;
@@ -177,7 +203,7 @@ namespace TreeComparison
             return root == nullNode;
         }
 
-        private readonly BinaryNode<T> header = new BinaryNode<T>(null); // For splay
+        private readonly BinaryNode<T> header = new BinaryNode<T>(default); // For splay
 
         /**
          * Internal method to perform a top-down splay.
@@ -256,32 +282,6 @@ namespace TreeComparison
             k2.Left = k1;
             return k2;
         }
-
-        // Basic node stored in unbalanced binary search trees
-        private class BinaryNode<AnyType>
-        {
-            // Constructors
-            BinaryNode(T theElement)
-            {
-                element = theElement;
-                Left = null;
-                Right = null; 
-            }
-
-            BinaryNode(T theElement, BinaryNode<T> lt, BinaryNode<T> rt)
-            {
-                element = theElement;
-                Left = lt;
-                Right = rt;
-            }
-
-            public T? element;            // The data in the node
-            public BinaryNode<T>? Left;   // Left child
-            public BinaryNode<T>? Right;  // Right child
-        }
-
-        private BinaryNode<T> root;
-        private BinaryNode<T> nullNode;
 
 
     }
