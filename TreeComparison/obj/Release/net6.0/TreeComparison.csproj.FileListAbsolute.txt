@@ -1,0 +1,15 @@
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\bin\Release\net6.0\TreeComparison.exe
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\bin\Release\net6.0\TreeComparison.deps.json
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\bin\Release\net6.0\TreeComparison.runtimeconfig.json
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\bin\Release\net6.0\TreeComparison.dll
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\bin\Release\net6.0\TreeComparison.pdb
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\TreeComparison.csproj.AssemblyReference.cache
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\TreeComparison.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\TreeComparison.AssemblyInfoInputs.cache
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\TreeComparison.AssemblyInfo.cs
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\TreeComparison.csproj.CoreCompileInputs.cache
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\TreeComparison.dll
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\refint\TreeComparison.dll
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\TreeComparison.pdb
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\TreeComparison.genruntimeconfig.cache
+C:\Users\cbcha\source\repos\TreeComparison\TreeComparison\obj\Release\net6.0\ref\TreeComparison.dll

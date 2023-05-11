@@ -9,16 +9,18 @@ using System.Text;
 
 class Program
 {
-    BinaryTree<int> bst = new BinaryTree<int>();
-
+    readonly static int TOPVAL = 150000;
+    readonly static int BOTVAL = 1; 
+    readonly static int TOPGAP = 41;
     public static void Main(string[] args)
     {
         
         Console.WriteLine("test:       insert | contains | remove |");
-
+        Console.WriteLine("----------------------------------------");
         bstTimes();
         splayTimes();
         avlTimes();
+        Console.WriteLine("----------------------------------------"); 
 
     }
 
@@ -31,28 +33,50 @@ class Program
         results.Append("BST:        | ");
 
         var insert = Stopwatch.StartNew();
-        for (int i = 0; i < 999; i++)
+        int gap = BOTVAL;
+        
+        for (int i = 0; i < TOPVAL; i++)
         {
-            bst.Insert(i);
+           
+            bst.Insert(gap);
+            gap += TOPGAP;
+            if (gap >= TOPVAL)
+            {
+                gap %= TOPVAL;
+                //Console.WriteLine(gap.ToString() + " ");
+            }
+
         }
         insert.Stop();
         results.Append('\n' + insert.ElapsedMilliseconds + "   | ");
+        //Console.WriteLine("completed insertion ");
 
         var contains = Stopwatch.StartNew();
-        for (int i = 0; i < 999999; i++)
+        for (int i = 1; i < TOPVAL; i++)
         {
-            bst.Contains(i);
+            for (int j = 1; j < 10; j++)
+            {
+                if (!bst.Contains(i))
+                {
+                    Console.WriteLine("Bloody murder " + i.ToString()); 
+                }
+                //Console.WriteLine(i.ToString() + " "); 
+            }
         }
         contains.Stop();
         results.Append('\n' + contains.ElapsedMilliseconds + "     | ");
+       // Console.WriteLine("completed contains ");
+
 
         var remove = Stopwatch.StartNew();
-        for (int i = 0; i < 999999; i++)
+        for (int i = 1; i < TOPVAL; i++)
         {
             bst.Remove(i);
         }
         remove.Stop();
         results.Append('\n' + remove.ElapsedMilliseconds + "     | ");
+       // Console.WriteLine("completed removal ");
+
 
         Console.WriteLine(results.ToString());
 
@@ -64,23 +88,39 @@ class Program
         results.Append("AVL:        |");
 
         var insert = Stopwatch.StartNew();
-        for (int i = 0; i < 999999; i++)
+        int gap = BOTVAL;
+
+        for (int i = 0; i < TOPVAL; i++)
         {
-            avl.Insert(i);
+
+            avl.Insert(gap);
+            gap += TOPGAP;
+            if (gap >= TOPVAL)
+            {
+                gap %= TOPVAL;
+                //Console.WriteLine(gap.ToString() + " ");
+            }
+
         }
         insert.Stop();
         results.Append('\n' + insert.ElapsedMilliseconds + "   | ");
 
         var contains = Stopwatch.StartNew();
-        for (int i = 0; i < 999999; i++)
+        for (int i = 0; i < TOPVAL; i++)
         {
-            avl.Contains(i);
+            for (int j = 0; j < 10; j++)
+            {
+                if (!avl.Contains(i))
+                {
+                    Console.WriteLine("Bloody murder " + i.ToString());
+                }
+            }
         }
         contains.Stop();
         results.Append('\n' + contains.ElapsedMilliseconds + "       | ");
 
         var remove = Stopwatch.StartNew();
-        for (int i = 0; i < 999999; i++)
+        for (int i = 0; i < TOPVAL; i++)
         {
             avl.Remove(i);
         }
@@ -99,23 +139,39 @@ class Program
         results.Append("Splay:      | ");
 
         var insert = Stopwatch.StartNew();
-        for (int i = 0; i < 999999; i++)
+        int gap = BOTVAL;
+
+        for (int i = 0; i < TOPVAL; i++)
         {
-            splay.Insert(i);
+
+            splay.Insert(gap);
+            gap += TOPGAP;
+            if (gap >= TOPVAL)
+            {
+                gap %= TOPVAL;
+                //Console.WriteLine(gap.ToString() + " ");
+            }
+
         }
         insert.Stop();
         results.Append('\n' + insert.ElapsedMilliseconds + "   | ");
 
         var contains = Stopwatch.StartNew();
-        for (int i = 0; i < 999999; i++)
+        for (int i = 0; i < TOPVAL; i++)
         {
-            splay.Contains(i);
+            for (int j = 0; j < 10; j++)
+            {
+                if (!splay.Contains(i))
+                {
+                    Console.WriteLine("Bloody murder " + i.ToString());
+                }
+            }
         }
         contains.Stop();
         results.Append('\n' + contains.ElapsedMilliseconds + "       | ");
 
         var remove = Stopwatch.StartNew();
-        for (int i = 0; i < 999999; i++)
+        for (int i = 0; i < TOPVAL; i++)
         {
             splay.Remove(i);
         }
